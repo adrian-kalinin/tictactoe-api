@@ -7,9 +7,9 @@ from game.serializers import GameSerializer
 
 @extend_schema_view(
     list=extend_schema(description="Get all games."),
-    create=extend_schema(description="Start a new game."),
+    # create=extend_schema(description="Start a new game."),
     retrieve=extend_schema(description="Get a game."),
-    update=extend_schema(description="Post a new move to a game."),
+    # update=extend_schema(description="Post a new move to a game."),
     destroy=extend_schema(description="Delete a game."),
 )
 class GameViewSet(viewsets.ModelViewSet):
@@ -19,8 +19,8 @@ class GameViewSet(viewsets.ModelViewSet):
     serializer_class = GameSerializer
     http_method_names = [
         "get",
-        "post",
-        "put",
+        # "post",
+        # "put",
         "delete",
         "options",
     ]
