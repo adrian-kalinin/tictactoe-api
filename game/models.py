@@ -10,7 +10,7 @@ class GameStatus(models.TextChoices):
 
     RUNNING = "RUNNING", _("Running")
     X_WON = "X_WON", _("X won")
-    O_WOM = "O_WON", _("O won")
+    O_WON = "O_WON", _("O won")
     DRAW = "DRAW", _("Draw")
 
 
@@ -26,4 +26,5 @@ class Game(models.Model):
     )
 
     def __str__(self):
+        """String representation of a game"""
         return f"'{self.board}' ({self.get_status_display()})"
