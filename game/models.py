@@ -1,7 +1,6 @@
 import uuid
 
 from django.db import models
-from django.core.validators import RegexValidator
 from django.utils.translation import gettext_lazy as _
 
 
@@ -18,9 +17,7 @@ class Game(models.Model):
     """Database model for games"""
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    board = models.CharField(
-        max_length=9, validators=[RegexValidator(regex=r"^[XO-]{9}$")]
-    )
+    board = models.CharField(max_length=9)
     status = models.CharField(
         max_length=20, choices=GameStatus.choices, default=GameStatus.RUNNING
     )
