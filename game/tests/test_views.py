@@ -35,7 +35,7 @@ class GameApiTestCase(TestCase):
         response = self.client.get(game_detail_url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data.get('id'), str(game.id))
+        self.assertEqual(response.data.get("id"), str(game.id))
 
     def test_delete_game(self):
         """Test deleting a game"""
