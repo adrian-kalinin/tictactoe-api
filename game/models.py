@@ -1,3 +1,26 @@
+import uuid
+
+from django.utils.translation import gettext_lazy as _
 from django.db import models
 
-# Create your models here.
+
+class GameStatus(models.TextChoices):
+    """Game status choices"""
+
+    RUNNING = "RUNNING", _("Running")
+    X_WON = "X_WON", _("X won")
+    O_WOM = "O_WON", _("O won")
+    DRAW = "DRAW", _("Draw")
+
+
+class Game(models.Model):
+    """Database model for games"""
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    board = models.CharField(max_length=9, default="---------")
+    status = models.CharField(
+        max_length=20, choices=GameStatus.choices, default=GameStatus.RUNNING
+    )
+
+    def __str__(self):
+        return f"'{self.board}' ({self.get_status_display()})"
