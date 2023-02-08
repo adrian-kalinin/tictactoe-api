@@ -34,9 +34,7 @@ SHARED_APPS = [
     "drf_spectacular",
 ]
 
-CUSTOM_APPS = [
-    "game"
-]
+CUSTOM_APPS = ["game"]
 
 INSTALLED_APPS = CORE_APPS + SHARED_APPS + CUSTOM_APPS
 
@@ -118,4 +116,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_PERMISSION_CLASSES": [],
 }
