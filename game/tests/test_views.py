@@ -27,6 +27,41 @@ class GameApiTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, serializer.data)
 
+    def test_create_game(self):
+        """Test creating a new game"""
+        data_set = [
+            {"board": "---------"},
+            {"board": "--X------"},
+            {"board": "------O--"},
+        ]
+
+        game_list_url = reverse("game:game-list")
+
+        for count, data in enumerate(data_set, start=1):
+            response = self.client.post(game_list_url, data)
+            games = Game.objects.all()
+
+            self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+            self.assertEqual(response.data.get("status"), GameStatus.RUNNING)
+            self.assertEqual(games.count(), count)
+
+    def test_create_game_invalid_board(self):
+        """Test creating a new game with an invalid board"""
+        data_set = [
+            {"board": "------------------"},
+            {"board": "---abc---"},
+            {"board": "-X-----O-"},
+        ]
+
+        game_list_url = reverse("game:game-list")
+
+        for data in data_set:
+            response = self.client.post(game_list_url, data)
+            games = Game.objects.all()
+
+            self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+            self.assertEqual(games.count(), 0)
+
     def test_retrieve_game(self):
         """Test retrieving a game"""
         game = Game.objects.create(board="---------", status=GameStatus.RUNNING)
