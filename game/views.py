@@ -1,8 +1,9 @@
 from drf_spectacular.utils import extend_schema, extend_schema_view
-from rest_framework import viewsets
+from rest_framework import status, viewsets
+from rest_framework.response import Response
 
 from game.models import Game
-from game.serializers import GameSerializer
+from game.serializers import GameLocationSerializer, GameSerializer
 
 
 @extend_schema_view(
@@ -24,3 +25,25 @@ class GameViewSet(viewsets.ModelViewSet):
         "delete",
         "options",
     ]
+
+    def create(self, request, *args, **kwargs):
+        """Return location link if game is successfully created"""
+        response = super().create(request, *args, **kwargs)
+
+        # Check the game was created
+        if response.status_code == status.HTTP_201_CREATED:
+            # Fetch created game object
+            game = Game.objects.get(id=response.data.get("id"))
+            # Use a different serializer for game location
+            serializer = GameLocationSerializer(game, context={"request": self.request})
+            # Get response headers
+            headers = self.get_success_headers(serializer.data)
+
+            # Return response with game location and 201 status
+            return Response(
+                serializer.data,
+                status=status.HTTP_201_CREATED,
+                headers=headers,
+            )
+
+        return response

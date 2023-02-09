@@ -42,7 +42,7 @@ class GameApiTestCase(TestCase):
             games = Game.objects.all()
 
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-            self.assertEqual(response.data.get("status"), GameStatus.RUNNING)
+            self.assertIn("location", response.data)
             self.assertEqual(games.count(), count)
 
     def test_create_game_invalid_board(self):
