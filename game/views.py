@@ -14,7 +14,7 @@ from game.serializers import GameLocationSerializer, GameSerializer
     destroy=extend_schema(description="Delete a game."),
 )
 class GameViewSet(viewsets.ModelViewSet):
-    """API view for games"""
+    """API for games"""
 
     queryset = Game.objects.all()
     serializer_class = GameSerializer
@@ -26,6 +26,7 @@ class GameViewSet(viewsets.ModelViewSet):
         "options",
     ]
 
+    @extend_schema(responses=GameLocationSerializer)
     def create(self, request, *args, **kwargs):
         """Return location link if game is successfully created"""
         response = super().create(request, *args, **kwargs)

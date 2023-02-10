@@ -6,7 +6,7 @@ from game.services import GameService
 
 
 class GameSerializer(serializers.ModelSerializer):
-    """Serializer for games"""
+    """A game object"""
 
     def validate_board(self, value):
         """Check that board is valid"""
@@ -33,7 +33,7 @@ class GameSerializer(serializers.ModelSerializer):
 
 
 class GameLocationSerializer(serializers.HyperlinkedModelSerializer):
-    """Serializer for game locations"""
+    """A game location object"""
 
     location = serializers.HyperlinkedIdentityField(view_name="game:game-detail")
 
