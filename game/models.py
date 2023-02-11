@@ -13,6 +13,13 @@ class GameStatus(models.TextChoices):
     DRAW = "DRAW", _("Draw")
 
 
+class GamePlayer(models.TextChoices):
+    """Player choices"""
+
+    X = "X", _("X")
+    O = "O", _("O")
+
+
 class Game(models.Model):
     """Database model for games"""
 
@@ -20,6 +27,9 @@ class Game(models.Model):
     board = models.CharField(max_length=9)
     status = models.CharField(
         max_length=20, choices=GameStatus.choices, default=GameStatus.RUNNING
+    )
+    previous_player = models.CharField(
+        max_length=1, choices=GamePlayer.choices, default=None, null=True
     )
 
     def __str__(self):
