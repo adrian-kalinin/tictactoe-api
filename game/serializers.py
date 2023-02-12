@@ -88,6 +88,7 @@ class GameSerializer(serializers.ModelSerializer):
         """Update game, autoplay and update status"""
         instance = super().update(instance, validated_data)
 
+        instance.update_status()
         instance.autoplay()
         instance.update_status()
         instance.save()
