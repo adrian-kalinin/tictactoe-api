@@ -47,10 +47,10 @@ class Game(models.Model):
     def autoplay(self):
         """Make a new move on the board"""
         empty_cells = [index for index, cell in enumerate(self.board) if cell == "-"]
-        next_move = random.choice(empty_cells)
 
-        if next_move:
+        if empty_cells:
             board = list(self.board)
+            next_move = random.choice(empty_cells)
             board[next_move] = "X" if self.player == GamePlayer.O else "O"
             self.board = "".join(board)
 
