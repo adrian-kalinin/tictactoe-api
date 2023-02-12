@@ -28,7 +28,7 @@ class Game(models.Model):
     status = models.CharField(
         max_length=20, choices=GameStatus.choices, default=GameStatus.RUNNING
     )
-    previous_player = models.CharField(
+    player = models.CharField(
         max_length=1, choices=GamePlayer.choices, default=None, null=True
     )
 
