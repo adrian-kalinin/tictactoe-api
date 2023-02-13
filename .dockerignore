@@ -1,0 +1,7 @@
+README.md
+LICENSE
+.idea
+.venv
+.git
+.gitignore
+.pre-commit-config.yaml
