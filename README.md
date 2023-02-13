@@ -58,9 +58,37 @@ The API has the following endpoints:
 
 Django provides admin interface with full access to manage your application. First, you need to create a superuser:
 
-`docker-compose run --rm server python manage.py createsuperuser`
+```docker-compose run --rm server python manage.py createsuperuser```
 
 Then, login with your credentials at `http://0.0.0.0:8000/admin/`.
+
+## Project structure
+
+Here is a short description of the project files:
+
+```
+|-- core
+|   |-- asgi.py -- ASGI configuration.
+|   |-- settings.py -- Project settings.
+|   |-- urls.py -- Project routing.
+|   `-- wsgi.py -- WSGI configuration.
+|-- game
+|   |-- migrations/ -- Database migrations. 
+|   |-- tests/ -- Tests for models and views.
+|   |-- admin.py -- Admin site configuration.
+|   |-- apps.py -- Application configuration.
+|   |-- models.py -- Database models.
+|   |-- serializers.py -- Data serializers.
+|   |-- urls.py -- Application routing.
+|   `-- views.py -- API endpoints.
+|-- Dockerfile -- Docker image configuration.
+|-- LICENSE -- License (MIT).
+|-- README.md -- This file.
+|-- docker-compose.yml -- Docker container configuration.
+|-- manage.py -- Django management tool.
+|-- pyproject.toml -- Python project configuration.
+`-- requirements.txt –– List of dependencies.
+```
 
 ---
 
