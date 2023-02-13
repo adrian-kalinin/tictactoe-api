@@ -92,6 +92,5 @@ Here is a short description of the project files:
 
 ---
 
-If you use MacOS with M1 chip and run into `django.db.utils.OperationalError: SCRAM authentication requires libpq version 10 or above
-`, use this workaround `export DOCKER_DEFAULT_PLATFORM=linux/amd64`. 
+If you use MacOS with M1 chip and run into `django.db.utils.OperationalError: SCRAM authentication requires libpq version 10 or above`, use this workaround `export DOCKER_DEFAULT_PLATFORM=linux/amd64` and rebuild the image. 
 
