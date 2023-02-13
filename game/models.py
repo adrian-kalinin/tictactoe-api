@@ -44,26 +44,35 @@ class Game(models.Model):
         max_length=1, choices=GamePlayer.choices, default=None, null=True
     )
 
+    @property
+    def is_valid(self):
+        """Check that board is valid"""
+        return len(self.board) == 9 and all(c in "XO-" for c in self.board)
+
     def autoplay(self):
         """Make a new move on the board"""
-        empty_cells = [index for index, cell in enumerate(self.board) if cell == "-"]
+        if self.is_valid:
+            empty_cells = [
+                index for index, cell in enumerate(self.board) if cell == "-"
+            ]
 
-        if empty_cells:
-            board = list(self.board)
-            next_move = random.choice(empty_cells)
-            board[next_move] = "X" if self.player == GamePlayer.O else "O"
-            self.board = "".join(board)
+            if empty_cells:
+                board = list(self.board)
+                next_move = random.choice(empty_cells)
+                board[next_move] = "X" if self.player == GamePlayer.O else "O"
+                self.board = "".join(board)
 
     def update_status(self):
         """Update game status based on the current board"""
-        if "-" not in self.board:
-            self.status = GameStatus.DRAW
+        if self.is_valid:
+            if "-" not in self.board:
+                self.status = GameStatus.DRAW
 
-        for combination in self.WIN_COMBINATIONS:
-            if all([self.board[index] == "X" for index in combination]):
-                self.status = GameStatus.X_WON
-            elif all([self.board[index] == "O" for index in combination]):
-                self.status = GameStatus.O_WON
+            for combination in self.WIN_COMBINATIONS:
+                if all([self.board[index] == "X" for index in combination]):
+                    self.status = GameStatus.X_WON
+                elif all([self.board[index] == "O" for index in combination]):
+                    self.status = GameStatus.O_WON
 
     def __str__(self):
         """String representation of a game"""
