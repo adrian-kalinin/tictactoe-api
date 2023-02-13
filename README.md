@@ -38,7 +38,7 @@ To run this API, you will need to have Docker and Docker Compose installed on yo
 
 ```docker-compose up```
 
-The API will now be available at `http://0.0.0.0:8000/`.
+The API will now be available at `http://127.0.0.1:8000/`.
 
 ### Tests
 
@@ -60,7 +60,7 @@ Django provides admin interface with full access to manage your application. Fir
 
 ```docker-compose run --rm server python manage.py createsuperuser```
 
-Then, login with your credentials at `http://0.0.0.0:8000/admin/`.
+Then, login with your credentials at `http://127.0.0.1:8000/admin/`.
 
 ## Project structure
 
